@@ -13,7 +13,8 @@ body{
 
 .logger_container{
     border-radius:10px 0px 0px 10px;
-    background-color:transparent;
+    background-color:rgba(0,0,0,.3);
+    backdrop-filter:blur(5px);
     border:1px solid cyan;
     border-right:none;
     border-left:none;
@@ -25,35 +26,31 @@ body{
     user-select:none;
     color:cyan;
     font-family:"Varela Round",cursive;
-    white-space: nowrap;
-    overflow:visible !important;
+    font-size:2em;
+    z-index:2;
 }
 .logger{
     min-height:40px;
-    width:fit-content;
+    width:100%;
     margin:0;
     background-color:transparent;
-    font-size:2em;
     user-select:none;
     color:cyan;
-    font-family:"Varela Round",cursive;
-    white-space: nowrap;
+    font-family:"Varela Round",cursive; 
     border:none;
-    padding-right:10px;
-    border-right:1px solid cyan;
-    animation:anim_selection 1s linear infinite;
+    padding-right:0px;
+    display:inline;
 }
-.logger::before{
-    content:">>";
+
+.selector{
+    min-height:40px;
+    animation:anim_selector 1s linear infinite;
 }
-@keyframes anim_selection{
+
+@keyframes anim_selector{
     from{border-right:1px solid cyan;}
     to{border-right:none;}
 }
-.logger:focus{
-    outline:none;
-}
-
 
 .flag{
     position:relative;
@@ -77,6 +74,16 @@ body{
     border-radius:20px;
     filter:contrast(2) saturate(2);
 }
+
+#boom{
+    width:100%;
+    height:100%;
+    position:fixed;
+    border:1px solid cyan;
+    overflow:visible;
+    /* z-index:3; */
+}
+
 .israel{
     position:absolute;
     width:100%;
@@ -90,3 +97,4 @@ body{
 
     display:none;
 }
+
