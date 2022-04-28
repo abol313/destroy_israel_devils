@@ -11,6 +11,25 @@ const sequenses = ['Hit the israel...'
     , 'thank who all support...'
     , '...'
 ]
+boom.setAttribute("width", "" + boom.clientWidth)
+boom.setAttribute("height", "" + boom.clientHeight)
+
+const ctx = boom.getContext("2d")
+const boomW = boom.clientWidth
+const boomH = boom.clientHeight
+let minimum = Math.min(boomW, boomH)
+let step = 3
+let r = Math.min(10,minimum/30)
+let dist = Math.min(minimum / 3, 160)
+
+ctx.fillStyle = "cyan"
+ctx.strokeStyle = "cyan"
+
+function Hit_israel() {
+
+}
+
+
 function setLog(text) {
     logText = ""
     let chars = text.split("")
@@ -28,22 +47,6 @@ function setLog(text) {
     }, 300)
 }
 
-boom.setAttribute("width", "" + boom.clientWidth)
-boom.setAttribute("height", "" + boom.clientHeight)
-
-const ctx = boom.getContext("2d")
-const boomW = boom.clientWidth
-const boomH = boom.clientHeight
-let minimum = Math.min(boomW, boomH)
-let step = 3
-let dist = Math.min(minimum / 3, 160)
-
-ctx.fillStyle = "cyan"
-ctx.strokeStyle = "cyan"
-
-function Hit_israel() {
-
-}
 
 //an array of dots
 //[[x,y,angle,collision]]
@@ -72,7 +75,7 @@ function createRandomDots(count) {
 
 function drawCircle(x, y) {
     ctx.beginPath()
-    ctx.arc(x, y, 10, 0, Math.PI * 2, 0)
+    ctx.arc(x, y,r, 0, Math.PI * 2, 0)
     ctx.closePath()
     ctx.fill()
 }
