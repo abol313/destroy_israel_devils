@@ -22,10 +22,10 @@ const boomW = boom.clientWidth
 const boomH = boom.clientHeight
 const minimum = Math.min(boomW, boomH)
 const step = 1
-const r = Math.min(5,minimum/30)
-const dist = Math.min(minimum / 3, 50)
+const r = Math.min(10,minimum/30)
+const dist = Math.min(minimum / 3, 200)
 const mouseDist = dist
-const countOfDots = 100
+const countOfDots = 30
 ctx.fillStyle = "cyan"
 ctx.strokeStyle = "cyan"
 
@@ -46,7 +46,7 @@ function Hit_israel() {
 
 
 function setLog(text) {
-    logText = ""
+    let logText = ""
     let chars = text.split("")
     selector.style.animationPlayState = "paused"
     selector.style.borderLeft = "1px solid cyan"
@@ -56,10 +56,18 @@ function setLog(text) {
         if (chars.length == 0) {
             selector.style.animationPlayState = "running"
             selector.style.borderLeft = "none"
-
             clearInterval(logInter)
         }
     }, 300)
+}
+function clearLog(){
+    let logText = logger.innerText
+    let clearLogInter = setInterval(()=>{
+        logText = logText.substring(0,-1)
+        logger.innerText = logText
+        if(logText=="")
+            clearInterval(clearLogInter)
+    },300)
 }
 
 
@@ -116,8 +124,9 @@ function render(step, dist) {
                 drawLine(x1, y1, x2, y2)            
         }
         if (Math.sqrt((mouseX - x1) ** 2 + (mouseY - y1) ** 2) <= mouseDist){
-            stepOne*=3
-            
+            stepOne*=5
+        }else if(stepOne!=step){
+            stepOne -= Math.round(Math.max(0,(stepOne - step)/4))
         }
         drawCircle(dot[0], dot[1])
         let dX = stepOne * Math.cos(dot[2]), dY = stepOne * Math.sin(dot[2])
