@@ -11,17 +11,21 @@ const sequenses = ['Hit the israel...'
     , 'thank who all support...'
     , '...'
 ]
+// boom.style.width = body.clientWidth + "px"
+// boom.style.height = body.clientHeight + "px"
+boom.style.width = "100vw"
+boom.style.height = "100vh"
 boom.setAttribute("width", "" + boom.clientWidth)
 boom.setAttribute("height", "" + boom.clientHeight)
-
 const ctx = boom.getContext("2d")
 const boomW = boom.clientWidth
 const boomH = boom.clientHeight
 const minimum = Math.min(boomW, boomH)
-const step = 3
+const step = 1
 const r = Math.min(5,minimum/30)
-const dist = Math.min(minimum / 3, 160)
-const countOfDots = 10
+const dist = Math.min(minimum / 3, 50)
+const mouseDist = dist
+const countOfDots = 100
 ctx.fillStyle = "cyan"
 ctx.strokeStyle = "cyan"
 
@@ -102,17 +106,19 @@ function render(step, dist) {
     let lastI = 0
     dots = dots.map(dot => {
         let stepOne = step
+        let x1 = dot[0]
+        let y1 = dot[1]
         for (let i = lastI+1 ; i<dots.length ; i++) {
             let otherDot = dots[i]
-            x1 = dot[0]
-            y1 = dot[1]
-            x2 = otherDot[0]
-            y2 = otherDot[1]
+            let x2 = otherDot[0]
+            let y2 = otherDot[1]
             if (Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2) <= dist)
                 drawLine(x1, y1, x2, y2)            
         }
-        if (Math.sqrt((mouseX - x1) ** 2 + (mouseY - y1) ** 2) <= dist/2)
-            stepOne/=3
+        if (Math.sqrt((mouseX - x1) ** 2 + (mouseY - y1) ** 2) <= mouseDist){
+            stepOne*=3
+            
+        }
         drawCircle(dot[0], dot[1])
         let dX = stepOne * Math.cos(dot[2]), dY = stepOne * Math.sin(dot[2])
         dot[0] += dX
