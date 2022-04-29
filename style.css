@@ -38,6 +38,7 @@ body{
     color:cyan;
     font-family:"Varela Round",cursive; 
     border:none;
+    border: 1px solid transparent;
     padding-right:0px;
     display:inline;
 }
