@@ -25,6 +25,17 @@ let dist = Math.min(minimum / 3, 160)
 ctx.fillStyle = "cyan"
 ctx.strokeStyle = "cyan"
 
+let mouseX,mouseY
+
+document.addEventListener("touchmove",(ev)=>{
+    mouseX = ev.touches[0].pageX
+    mouseY = ev.touches[0].pageY
+})
+document.addEventListener("mousemove",(ev)=>{
+    mouseX = ev.x
+    mouseY = ev.y
+})
+
 function Hit_israel() {
 
 }
@@ -89,16 +100,20 @@ function drawLine(x1, y1, x2, y2) {
 
 function render(step, dist) {
     dots = dots.map(dot => {
+        let stepOne = step
         for (let otherDot of dots) {
+            
             x1 = dot[0]
             y1 = dot[1]
             x2 = otherDot[0]
             y2 = otherDot[1]
             if (Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2) <= dist)
-                drawLine(x1, y1, x2, y2)
+                drawLine(x1, y1, x2, y2)            
         }
+        if (Math.sqrt((mouseX - x1) ** 2 + (mouseY - y1) ** 2) <= dist/2)
+            stepOne/=3
         drawCircle(dot[0], dot[1])
-        let dX = step * Math.cos(dot[2]), dY = step * Math.sin(dot[2])
+        let dX = stepOne * Math.cos(dot[2]), dY = stepOne * Math.sin(dot[2])
         dot[0] += dX
         dot[1] += dY
 
