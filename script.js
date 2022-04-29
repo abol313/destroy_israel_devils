@@ -2,7 +2,7 @@ const logger = document.querySelector(".logger")
 const body = document.body
 const boom = document.getElementById("boom")
 const selector = document.querySelector(".selector")
-const sequenses = ['Hit the israel...'
+const sequences = ['Hit the israel...'
     , '...'
     , 'devils in israel will soon be destroyed...'
     , '...'
@@ -40,10 +40,16 @@ document.addEventListener("mousemove",(ev)=>{
     mouseY = ev.y
 })
 
+let hitted = 0
 function Hit_israel() {
-
+    if(hitted>=50)nextSequence()
+    hitted++
 }
-
+nextSequence()
+function nextSequence(){
+    if(sequences.length==0)return
+    clearLog(()=>setLog(sequences.shift()))
+}
 
 function setLog(text) {
     let logText = ""
@@ -60,14 +66,17 @@ function setLog(text) {
         }
     }, 300)
 }
-function clearLog(){
+function clearLog(clearedCallback){
     let logText = logger.innerText
     let clearLogInter = setInterval(()=>{
-        logText = logText.substring(0,-1)
+        logText = logText.slice(0,-1)
         logger.innerText = logText
-        if(logText=="")
+        if(logText==""){
             clearInterval(clearLogInter)
-    },300)
+            clearedCallback()
+        }
+        
+    },100)
 }
 
 
