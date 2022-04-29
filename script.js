@@ -17,11 +17,11 @@ boom.setAttribute("height", "" + boom.clientHeight)
 const ctx = boom.getContext("2d")
 const boomW = boom.clientWidth
 const boomH = boom.clientHeight
-let minimum = Math.min(boomW, boomH)
-let step = 3
-let r = Math.min(10,minimum/30)
-let dist = Math.min(minimum / 3, 160)
-
+const minimum = Math.min(boomW, boomH)
+const step = 3
+const r = Math.min(5,minimum/30)
+const dist = Math.min(minimum / 3, 160)
+const countOfDots = 10
 ctx.fillStyle = "cyan"
 ctx.strokeStyle = "cyan"
 
@@ -62,7 +62,7 @@ function setLog(text) {
 //an array of dots
 //[[x,y,angle,collision]]
 let dots
-createRandomDots(30)
+createRandomDots(countOfDots)
 
 
 function startStarsAnimation(count) {
