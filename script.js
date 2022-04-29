@@ -99,10 +99,11 @@ function drawLine(x1, y1, x2, y2) {
 }
 
 function render(step, dist) {
+    let lastI = 0
     dots = dots.map(dot => {
         let stepOne = step
-        for (let otherDot of dots) {
-            
+        for (let i = lastI+1 ; i<dots.length ; i++) {
+            let otherDot = dots[i]
             x1 = dot[0]
             y1 = dot[1]
             x2 = otherDot[0]
@@ -127,6 +128,7 @@ function render(step, dist) {
                 dot[1] = (dot[1] >= 0) * boomH
             }
         } else dot[3] = false
+        lastI++
         return dot
     })
 }
